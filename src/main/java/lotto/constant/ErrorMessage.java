@@ -1,2 +1,9 @@
-package lotto.constant;public class ErrorMessage {
+package lotto.constant;
+
+public final class ErrorMessage {
+    public static final String NUMBER_RANGE = "[ERROR] 숫자의 범위는 1 ~ 45 이어야 합니다.";
+    public static final String PRICE_MINIMUM = "[ERROR] 금액은 최소 1000원입니다.";
+    public static final String PRICE_UNIT = "[ERROR] 금액 단위는 1000원 단위입니다.";
+
+    private ErrorMessage() {}
 }
