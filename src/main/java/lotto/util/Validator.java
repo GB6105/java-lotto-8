@@ -20,6 +20,11 @@ public final class Validator {
             validateNumberRange(number);
         }
     }
+    public static void validateNumbersSize(List<Integer> numbers) {
+        if (numbers.size() != 6){
+            throw new IllegalArgumentException(ErrorMessage.NUMBER_COUNT);
+        }
+    }
 
     public static void validatePriceRange(int price) {
         if (price < PRICE_RANGE_MIN) {
