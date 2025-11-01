@@ -1,28 +1,51 @@
 package lotto.domain;
 
 import java.util.ArrayList;
+import java.util.EnumMap;
 import java.util.List;
+import java.util.Map;
+import lotto.constant.Rank;
 
-public class CustomerLottos {
+public class Lottos {
     private List<Lotto> lottos;
 
-    public CustomerLottos(List<Lotto> lottos) {
+    public Lottos(List<Lotto> lottos) {
         this.lottos = new ArrayList<Lotto>(lottos);
     }
 
-    public CustomerLottos from(List<Lotto> lottos) {
-        return new CustomerLottos(lottos);
+    public Lottos from(List<Lotto> lottos) {
+        return new Lottos(lottos);
     }
 
-    public static CustomerLottos createEmpty(){
-        return new CustomerLottos(new ArrayList<>());
+    public List<Lotto> getLottos(){
+        return lottos;
     }
 
-    public CustomerLottos add(Lotto lotto) {
+    public static Lottos createEmpty() {
+        return new Lottos(new ArrayList<>());
+    }
+
+    public Lottos add(Lotto lotto) {
         List<Lotto> newLotto = new ArrayList<>(this.lottos);
         newLotto.add(lotto);
-        return new CustomerLottos(newLotto);
+        return new Lottos(newLotto);
     }
 
+    public Map<Rank, Integer> match(WinningNumbers winningNumbers) {
+        Map<Rank, Integer> matchCounts = new EnumMap<>(Rank.class);
 
+        for(Rank rank : Rank.values()) {
+            matchCounts.put(rank, 0);
+        }
+
+        for (Lotto lotto : lottos) {
+            Rank rank = lotto.match(
+                    winningNumbers
+            );
+            if(rank != Rank.NONE) {
+                matchCounts.put(rank, matchCounts.get(rank) + 1);
+            }
+        }
+        return matchCounts;
+    }
 }
