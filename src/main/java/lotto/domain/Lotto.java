@@ -1,6 +1,9 @@
 package lotto.domain;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import lotto.constant.Rank;
 
 public class Lotto {
     private final List<Integer> numbers;
@@ -8,7 +11,9 @@ public class Lotto {
     public Lotto(List<Integer> numbers) {
         validate(numbers);
         validateDuplicate(numbers);
-        this.numbers = numbers;
+        List<Integer> sortedNumbers = new ArrayList<>(numbers); // 테스트 코드를 위한 깊은 복사
+        Collections.sort(sortedNumbers);
+        this.numbers = sortedNumbers;
     }
 
     private void validate(List<Integer> numbers) {
@@ -27,4 +32,26 @@ public class Lotto {
         }
     }
 
+    public Rank match(WinningNumbers winningNumbers){
+        int matchCount = countMatchingNumbers(winningNumbers);
+        boolean hasBonus = checkBonus(winningNumbers);
+        return Rank.of(matchCount, hasBonus);
+    }
+
+    public int countMatchingNumbers(WinningNumbers winningNumbers) {
+        long matchCount = this.numbers.stream()
+                .filter(winningNumbers::containsWinningNumber)
+                .count();
+        return (int) matchCount;
+    }
+
+    private boolean checkBonus(WinningNumbers winningNumbers) {
+        boolean matchBonus = this.numbers.stream()
+                .anyMatch(winningNumbers::containsBonusNumber);
+        return matchBonus;
+    }
+
+    public List<Integer> getNumbers() {
+        return List.copyOf(numbers);
+    }
 }
