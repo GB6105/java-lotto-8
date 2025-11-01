@@ -39,4 +39,19 @@ public enum Rank {
                 .orElse(NONE);
     }
 
+    public int getRank() {
+        return rank;
+    }
+
+    public int getPrize(){
+        return prize;
+    }
+
+    public boolean isBonus() {
+        return isBonus;
+    }
+
+    public int getMatchingCount() {
+        return matchingCount;
+    }
 }
