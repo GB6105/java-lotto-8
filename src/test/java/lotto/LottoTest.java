@@ -1,12 +1,19 @@
 package lotto;
 
+import java.util.Arrays;
+import java.util.stream.Collectors;
+import lotto.constant.Rank;
 import lotto.domain.Lotto;
+import lotto.domain.WinningNumbers;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 class LottoTest {
     @Test
@@ -23,4 +30,19 @@ class LottoTest {
     }
 
     // TODO: 추가 기능 구현에 따른 테스트 코드 작성
+
+    @DisplayName("로또 번호와 당첨 번호를 비교하여 Rank를 반환한다.")
+    @Test
+    void lotto_match_test(){
+        //given
+        List<Integer> test = Arrays.asList(1, 2, 3, 4, 5, 6);
+        Lotto lotto = new Lotto(test);
+        int bonusNumber = 10;
+
+        //when
+        WinningNumbers winningNumbers = new WinningNumbers(test,bonusNumber);
+        Rank rankResult = lotto.match(winningNumbers);
+        //then
+        assertThat(rankResult).isEqualTo(Rank.FIRST);
+    }
 }
