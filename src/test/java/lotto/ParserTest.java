@@ -19,7 +19,7 @@ class ParserTest {
 
         //when
         Parser parser = new Parser();
-        int price = parser.price(priceInput);
+        int price = parser.number(priceInput);
 
         //then
         assertThat(price).isEqualTo(priceResult);
@@ -34,24 +34,10 @@ class ParserTest {
 
         //when
         Parser parser = new Parser();
-        List<Integer> targetNumber = parser.targetNumber(targetNumberInput);
+        List<Integer> targetNumber = parser.numbers(targetNumberInput);
 
         //then
         assertThat(targetNumber).isEqualTo(List.of(1, 2, 3, 4, 5, 6));
     }
 
-    @DisplayName("문자를 정수로 반환한다.")
-    @Test
-    public void bonusNumberParserTest() {
-        //given
-        String bonusNumberInput = "10";
-        int bonusNumberResult = 10;
-
-        //when
-        Parser parser = new Parser();
-        int bonusNumber = parser.bonusNumber(bonusNumberInput);
-
-        //then
-        assertThat(bonusNumber).isEqualTo(bonusNumberResult);
-    }
 }
