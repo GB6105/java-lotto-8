@@ -6,6 +6,7 @@ import lotto.constant.ErrorMessage;
 public final class Validator {
     private static final int NUMBER_RANGE_MIN = 1;
     private static final int NUMBER_RANGE_MAX = 45;
+    private static final int NUMBER_SIZE = 6;
     private static final int PRICE_RANGE_MIN = 1000;
     private static final int PRICE_RANGE_MAX = 100000;
     private static final int PRICE_UNIT = 1000;
@@ -22,7 +23,7 @@ public final class Validator {
         }
     }
     public static void validateNumbersSize(List<Integer> numbers) {
-        if (numbers.size() != 6){
+        if (numbers.size() != NUMBER_SIZE){
             throw new IllegalArgumentException(ErrorMessage.NUMBER_COUNT.getMessage());
         }
     }
