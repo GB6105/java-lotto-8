@@ -1,32 +1,26 @@
 package lotto.application;
 
 import java.util.List;
-import java.util.Map;
-import lotto.constant.Rank;
-import lotto.domain.Lotto;
-import lotto.domain.LottoGenerator;
 import lotto.domain.LottoResult;
 import lotto.domain.Lottos;
 import lotto.domain.WinningNumbers;
-import lotto.util.Parser;
-import lotto.util.Validator;
-import lotto.view.InputView;
-import lotto.view.OutputView;
+import lotto.presentation.Reader;
+import lotto.presentation.OutputView;
 
-public class LottoController {
-    private InputController inputController;
+public class LottoGame {
+    private Reader reader;
     private OutputView outputView;
     private LottoService lottoService;
 
-    public LottoController(InputController inputController, OutputView outputView, LottoService lottoService) {
-        this.inputController = inputController;
+    public LottoGame(Reader reader, OutputView outputView, LottoService lottoService) {
+        this.reader = reader;
         this.outputView = outputView;
         this.lottoService = lottoService;
     }
 
     public void run() {
         // 구매 금액 입력
-        int price = inputController.getPrice();
+        int price = reader.getPrice();
 
         //로또 구입
         Lottos lottos = lottoService.purchaseLottos(price);
@@ -34,10 +28,10 @@ public class LottoController {
         outputView.printLottos(lottos);
 
         // 당첨 번호 입력
-        List<Integer> winningNumber = inputController.getWinningNumber();
+        List<Integer> winningNumber = reader.getWinningNumber();
 
         // 보너스 번호 입력
-        int bonusNumber = inputController.getBonusNumber();
+        int bonusNumber = reader.getBonusNumber();
         WinningNumbers winningNumbers = new WinningNumbers(winningNumber, bonusNumber);
 
         //결과 출력

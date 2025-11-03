@@ -1,20 +1,16 @@
-package lotto.application;
+package lotto.presentation;
 
 import java.util.List;
 import lotto.util.Parser;
 import lotto.util.Validator;
-import lotto.view.InputView;
-import lotto.view.OutputView;
 
 public class InputController {
     private InputView inputView;
     private OutputView outputView;
-    private Parser parser;
 
-    public InputController(InputView inputView, OutputView outputView, Parser parser) {
+    public InputController(InputView inputView, OutputView outputView) {
         this.inputView = inputView;
         this.outputView = outputView;
-        this.parser = parser;
     }
 
     public int getBonusNumber() {
@@ -22,9 +18,10 @@ public class InputController {
             try {
                 outputView.printRequireBonusNumberMessage();
                 String bonusNumberInput = inputView.readBonusNumber();
-                int bonusNumber = parser.number(bonusNumberInput);
+                int bonusNumber = Parser.number(bonusNumberInput);
                 Validator.validateNumberRange(bonusNumber);
                 return bonusNumber;
+
             } catch (IllegalArgumentException e) {
                 System.out.println(e.getMessage());
             }
@@ -36,10 +33,11 @@ public class InputController {
             try {
                 outputView.printRequireWinningNumberMessage();
                 String winningNumberInput = inputView.readNumbers();
-                List<Integer> winningNumber = parser.numbers(winningNumberInput);
+                List<Integer> winningNumber = Parser.numbers(winningNumberInput);
                 Validator.validateNumbersRange(winningNumber);
                 Validator.validateNumbersSize(winningNumber);
                 return winningNumber;
+
             } catch (IllegalArgumentException e) {
                 System.out.println(e.getMessage());
             }
@@ -51,10 +49,11 @@ public class InputController {
             try {
                 outputView.printRequirePriceMessage();
                 String priceInput = inputView.readPrice();
-                int price = parser.number(priceInput);
+                int price = Parser.number(priceInput);
                 Validator.validatePriceRange(price);
                 Validator.validatePriceUnit(price);
                 return price;
+
             } catch (IllegalArgumentException e) {
                 System.out.println(e.getMessage());
             }
