@@ -1,8 +1,8 @@
 package lotto.domain;
 
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
+import lotto.constant.ErrorMessage;
 import lotto.constant.Rank;
 
 public class Lotto {
@@ -11,9 +11,10 @@ public class Lotto {
     public Lotto(List<Integer> numbers) {
         validate(numbers);
         validateDuplicate(numbers);
-        List<Integer> sortedNumbers = new ArrayList<>(numbers); // 테스트 코드를 위한 깊은 복사
-        Collections.sort(sortedNumbers);
-        this.numbers = sortedNumbers;
+
+        this.numbers = numbers.stream()
+                .sorted()
+                .collect(Collectors.toUnmodifiableList());
     }
 
     private void validate(List<Integer> numbers) {
@@ -28,11 +29,11 @@ public class Lotto {
 
         long distinctNumbers = numbers.stream().distinct().count();
         if (originCount != distinctNumbers) {
-            throw new IllegalArgumentException("[ERROR] 숫자는 중복 될 수 없습니다.");
+            throw new IllegalArgumentException(ErrorMessage.NUMBER_DUPLICATE.getMessage());
         }
     }
 
-    public Rank match(WinningNumbers winningNumbers){
+    public Rank match(WinningNumbers winningNumbers) {
         int matchCount = countMatchingNumbers(winningNumbers);
         boolean hasBonus = checkBonus(winningNumbers);
         return Rank.of(matchCount, hasBonus);
