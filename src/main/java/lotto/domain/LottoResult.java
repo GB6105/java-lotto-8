@@ -12,9 +12,6 @@ public class LottoResult {
         this.profitRate = calculateProfitRate(priceAmount);
     }
 
-    public LottoResult from(Map<Rank, Integer> matchCounts, double profitRate) {
-        return new LottoResult(matchCounts, profitRate);
-    }
 
     public Map<Rank, Integer> getMatchCounts() {
         return matchCounts;

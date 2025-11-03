@@ -17,7 +17,7 @@ public class Lottos {
         return new Lottos(lottos);
     }
 
-    public List<Lotto> getLottos(){
+    public List<Lotto> getLottos() {
         return lottos;
     }
 
@@ -34,15 +34,13 @@ public class Lottos {
     public Map<Rank, Integer> match(WinningNumbers winningNumbers) {
         Map<Rank, Integer> matchCounts = new EnumMap<>(Rank.class);
 
-        for(Rank rank : Rank.values()) {
+        for (Rank rank : Rank.values()) {
             matchCounts.put(rank, 0);
         }
 
         for (Lotto lotto : lottos) {
-            Rank rank = lotto.match(
-                    winningNumbers
-            );
-            if(rank != Rank.NONE) {
+            Rank rank = lotto.match(winningNumbers);
+            if (rank != Rank.NONE) {
                 matchCounts.put(rank, matchCounts.get(rank) + 1);
             }
         }

@@ -11,6 +11,7 @@ public enum Message {
     TOTAL_RESULT("총 수익률은 %.1f%%입니다.");
 
     private final String message;
+
     Message(String message) {
         this.message = message;
     }
