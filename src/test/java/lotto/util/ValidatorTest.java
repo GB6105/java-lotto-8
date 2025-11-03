@@ -26,12 +26,12 @@ public class ValidatorTest {
     @ParameterizedTest
     @CsvSource({
             "0",
-            "100"
+            "1000000"
     })
     public void priceRangeTest(int invalidNumber) {
         assertThatThrownBy(() -> Validator.validatePriceRange(invalidNumber))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("[ERROR] 금액은 최소 1000원입니다.");
+                .hasMessage("[ERROR] 금액은 최소 1000원 최대 100,000원 입니다.");
     }
 
     @DisplayName("금액 단위가 1000으로 나누어지지 않으면 오류를 발생")
