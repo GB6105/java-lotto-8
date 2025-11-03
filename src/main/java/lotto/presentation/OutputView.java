@@ -1,4 +1,4 @@
-package lotto.view;
+package lotto.presentation;
 
 import java.text.NumberFormat;
 import java.util.Arrays;
@@ -31,7 +31,7 @@ public class OutputView {
         System.out.println(Message.REQUIRE_BONUS_NUMBER.getMessage());
     }
 
-    public void printPurchaseMessage(int count){
+    public void printPurchaseMessage(int count) {
         System.out.println();
         String formatString = String.format(
                 Message.PURCHASE_MESSAGE.getMessage(),
@@ -40,21 +40,21 @@ public class OutputView {
         System.out.println(formatString);
     }
 
-    public void printLottos(Lottos lottos){
-        for(Lotto lotto : lottos.getLottos()){
+    public void printLottos(Lottos lottos) {
+        for (Lotto lotto : lottos.getLottos()) {
             System.out.println(lotto.getNumbers());
         }
     }
 
 
-    public void printTotalResult(LottoResult result){
+    public void printTotalResult(LottoResult result) {
         System.out.println();
         printResult();
         printMatchResultMessage(result.getMatchCounts());
         printProfitRateResult(result.getProfitRate());
     }
 
-    private void printResult(){
+    private void printResult() {
         System.out.println(Message.RESULT_MESSAGE.getMessage());
         System.out.println("---");
     }
@@ -81,14 +81,14 @@ public class OutputView {
         System.out.println(formatMessage);
     }
 
-    private void printMatchResultMessage(Map<Rank,Integer> matchResult) {
+    private void printMatchResultMessage(Map<Rank, Integer> matchResult) {
 
         List<Rank> ranks = Arrays.asList(Rank.values());
 
         Collections.sort(ranks, Comparator.comparing(Rank::getRank).reversed());
 
-        for(Rank rank : ranks) {
-            if(rank == Rank.NONE){
+        for (Rank rank : ranks) {
+            if (rank == Rank.NONE) {
                 continue;
             }
             int count = matchResult.get(rank);
@@ -96,11 +96,11 @@ public class OutputView {
             int prize = rank.getPrize();
             boolean isBonus = rank.isBonus();
 
-            if(isBonus){
+            if (isBonus) {
                 printMatchBonusResult(matchCount, prize, count);
             }
 
-            if(!isBonus){
+            if (!isBonus) {
                 printMatchResult(matchCount, prize, count);
             }
         }

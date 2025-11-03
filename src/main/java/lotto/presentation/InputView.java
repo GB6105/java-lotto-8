@@ -1,7 +1,6 @@
-package lotto.view;
+package lotto.presentation;
 
 import camp.nextstep.edu.missionutils.Console;
-import java.util.List;
 
 public class InputView {
     public String readPrice(){
