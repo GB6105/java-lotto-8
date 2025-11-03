@@ -5,8 +5,6 @@ import java.util.List;
 import lotto.constant.ErrorMessage;
 
 public final class Parser {
-    //유틸 클래스화
-
     // 입력 받은 문자를 정수로 반환
     public static int number(String price) {
         try {

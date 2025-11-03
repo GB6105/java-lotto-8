@@ -16,6 +16,7 @@ public class LottoService {
         this.generator = generator;
     }
 
+    // 구매 금액에 따라 로또 생성
     public Lottos purchaseLottos(int price){
         int purchasedCount = price / 1000;
         Lottos customerLottos = Lottos.createEmpty();
@@ -27,6 +28,7 @@ public class LottoService {
         return customerLottos;
     }
 
+    // 로또 매칭 결과 반환
     public LottoResult checkLottos(Lottos lottos, WinningNumbers winningNumbers, int price){
         Map<Rank, Integer> matchCount = lottos.match(winningNumbers);
         LottoResult result = new LottoResult(matchCount, price);
