@@ -7,11 +7,12 @@ public final class Validator {
     private static final int NUMBER_RANGE_MIN = 1;
     private static final int NUMBER_RANGE_MAX = 45;
     private static final int PRICE_RANGE_MIN = 1000;
+    private static final int PRICE_RANGE_MAX = 100000;
     private static final int PRICE_UNIT = 1000;
 
     public static void validateNumberRange(int number) {
         if (number < NUMBER_RANGE_MIN || number > NUMBER_RANGE_MAX) {
-            throw new IllegalArgumentException(ErrorMessage.NUMBER_RANGE);
+            throw new IllegalArgumentException(ErrorMessage.NUMBER_RANGE.getMessage());
         }
     }
 
@@ -22,19 +23,19 @@ public final class Validator {
     }
     public static void validateNumbersSize(List<Integer> numbers) {
         if (numbers.size() != 6){
-            throw new IllegalArgumentException(ErrorMessage.NUMBER_COUNT);
+            throw new IllegalArgumentException(ErrorMessage.NUMBER_COUNT.getMessage());
         }
     }
 
     public static void validatePriceRange(int price) {
-        if (price < PRICE_RANGE_MIN) {
-            throw new IllegalArgumentException(ErrorMessage.PRICE_MINIMUM);
+        if (price < PRICE_RANGE_MIN || price >PRICE_RANGE_MAX) {
+            throw new IllegalArgumentException(ErrorMessage.PRICE_RANGE.getMessage());
         }
     }
 
     public static void validatePriceUnit(int price) {
         if (price % PRICE_UNIT != 0) {
-            throw new IllegalArgumentException(ErrorMessage.PRICE_UNIT);
+            throw new IllegalArgumentException(ErrorMessage.PRICE_UNIT.getMessage());
         }
     }
 
