@@ -4,11 +4,11 @@ import java.util.List;
 import lotto.util.Parser;
 import lotto.util.Validator;
 
-public class InputController {
+public class Reader {
     private InputView inputView;
     private OutputView outputView;
 
-    public InputController(InputView inputView, OutputView outputView) {
+    public Reader(InputView inputView, OutputView outputView) {
         this.inputView = inputView;
         this.outputView = outputView;
     }
