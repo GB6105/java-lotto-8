@@ -1,4 +1,4 @@
-package lotto.application;
+package lotto.service;
 
 import java.util.List;
 import java.util.Map;
